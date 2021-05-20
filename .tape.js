@@ -7,9 +7,6 @@ module.exports = {
   },
   'removesRuleIfCannotFindClass/test': {
     message: 'removes statements that cannot be resolved',
-    warnings: {
-      text: "Could not find class '.c'",
-    },
   },
   'doesNotOverwriteOverlappingNames/test': {
     message: 'does not overwrite overlapping names',
@@ -22,6 +19,9 @@ module.exports = {
   },
   'supportsMultipleClassSelector/test': {
     message: 'supports multiple class selectors',
+  },
+  'multipleSelectors/test': {
+    message: 'resolves multiple classes',
   },
   'complex/test': {
     message: 'all combined',

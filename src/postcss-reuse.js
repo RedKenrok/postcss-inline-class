@@ -3,34 +3,6 @@ const findInlineDeclarations = require('./utils/findInlineDeclarations.js')
 const findNestedRules = require('./utils/findNestedRules.js')
 const findMediaQueries = require('./utils/findMediaQueries.js')
 
-const processAtRule = (atRule, root, targetSelector, onError) => {
-  const matchedDeclarations = findInlineDeclarations(root, targetSelector)
-  const nestedRules = findNestedRules(root, targetSelector)
-  const mediaQueries = findMediaQueries(root, targetSelector)
-
-  if (matchedDeclarations.length === 0 && nestedRules.length === 0) {
-    onError(`Could not find class '${targetSelector}'`)
-    return []
-  }
-
-  for (const nestedRule of nestedRules) {
-    nestedRule.selector = replaceClassName(
-      nestedRule.selector,
-      targetSelector,
-      atRule.parent.selector
-    )
-  }
-
-  for (const mediaQuery of mediaQueries) {
-    for (const node of mediaQuery.nodes) {
-      node.selectors = node.selectors.map((selector) => replaceClassName(selector, targetSelector, atRule.parent.selector))
-    }
-  }
-
-  atRule.replaceWith(matchedDeclarations)
-  return [...nestedRules, ...mediaQueries]
-}
-
 const plugin = (options = {}) => {
   options = Object.assign({
     atRuleName: 'reuse',
@@ -39,22 +11,44 @@ const plugin = (options = {}) => {
   return {
     postcssPlugin: 'postcss-reuse',
 
-    Once (root, { result }) {
+    Once (root) {
       const newNodes = []
       const atRuleWalker = (atRule) => {
-        const onError = (message) => {
-          atRule.warn(result, message)
-          atRule.remove()
+        // Deconstruct selectors.
+        const targetSelectors = atRule.params.split(',').map(param => param.trim())
+
+        // Find declarations to replace with.
+        const matchedDeclarations = findInlineDeclarations(root, targetSelectors)
+
+        // Create additional rules for media and nested queries.
+        for (const targetSelector of targetSelectors) {
+          const nestedRules = findNestedRules(root, targetSelector)
+          for (const nestedRule of nestedRules) {
+            nestedRule.selector = replaceClassName(
+              nestedRule.selector,
+              targetSelector,
+              atRule.parent.selector
+            )
+          }
+          newNodes.push(...nestedRules)
+
+          const mediaQueries = findMediaQueries(root, targetSelector)
+          for (const mediaQuery of mediaQueries) {
+            for (const node of mediaQuery.nodes) {
+              node.selectors = node.selectors.map((selector) => replaceClassName(selector, targetSelector, atRule.parent.selector))
+            }
+          }
+          newNodes.push(...mediaQueries)
         }
 
-        const selectors = atRule.params.split(',')
-        for (const selector of selectors) {
-          newNodes.push(...processAtRule(atRule, root, selector.trim(), onError))
-        }
+        // Replace at rule with matched declarations.
+        atRule.replaceWith(matchedDeclarations)
       }
 
+      // Start walking the tree.
       root.walkRules((rule) => rule.walkAtRules(options.atRuleName, atRuleWalker))
 
+      // Append new nodes to tree.
       root.append(...newNodes)
     },
   }

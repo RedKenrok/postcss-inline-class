@@ -1,9 +1,11 @@
-const findInlineDeclarations = (root, targetSelector) => {
+const findInlineDeclarations = (root, targetSelectors) => {
   const inlineDeclarations = []
 
   root.walkRules((rule) => {
-    if (rule.selectors.includes(targetSelector) && rule.parent.type === 'root') {
-      inlineDeclarations.push(rule)
+    for (const targetSelector of targetSelectors) {
+      if (rule.selectors.includes(targetSelector) && rule.parent.type === 'root') {
+        inlineDeclarations.push(rule)
+      }
     }
   })
 
