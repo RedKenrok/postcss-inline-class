@@ -1,37 +1,37 @@
 const findMediaQueries = (root, targetSelector) => {
-  const mediaQueries = [];
+  const mediaQueries = []
 
   root.walkAtRules((atRule) => {
     if (atRule.name !== 'media') {
-      return;
+      return
     }
 
-    const mediaQuery = atRule.clone();
-    const newNodes = [];
+    const mediaQuery = atRule.clone()
+    const newNodes = []
 
     mediaQuery.walkRules((rule) => {
       if (rule.selectors.includes(targetSelector)) {
-        newNodes.push(rule.clone());
-        return;
+        newNodes.push(rule.clone())
+        return
       }
 
       const isNestedRule = rule.selectors.find((selector) =>
-        selector.includes(targetSelector),
-      );
+        selector.includes(targetSelector)
+      )
       if (isNestedRule) {
-        newNodes.push(rule.clone());
+        newNodes.push(rule.clone())
       }
-    });
+    })
 
     if (newNodes.length === 0) {
-      return;
+      return
     }
 
-    mediaQuery.nodes = newNodes;
-    mediaQueries.push(mediaQuery);
-  });
+    mediaQuery.nodes = newNodes
+    mediaQueries.push(mediaQuery)
+  })
 
-  return mediaQueries.map((match) => match.clone()).flat();
-};
+  return mediaQueries.map((match) => match.clone()).flat()
+}
 
-module.exports = findMediaQueries;
+module.exports = findMediaQueries

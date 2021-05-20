@@ -1,23 +1,23 @@
 const findNestedRules = (root, targetSelector) => {
-  const nestedMatches = [];
+  const nestedMatches = []
 
   root.walkRules((rule) => {
     if (rule.parent.type !== 'root') {
-      return;
+      return
     }
 
     if (rule.selectors.includes(targetSelector)) {
-      return;
+      return
     }
 
-    const isNestedRule = rule.selectors.find((selector) => selector.includes(targetSelector));
+    const isNestedRule = rule.selectors.find((selector) => selector.includes(targetSelector))
 
     if (isNestedRule) {
-      nestedMatches.push(rule.clone());
+      nestedMatches.push(rule.clone())
     }
-  });
+  })
 
-  return nestedMatches.map((match) => match.clone()).flat();
-};
+  return nestedMatches.map((match) => match.clone()).flat()
+}
 
-module.exports = findNestedRules;
+module.exports = findNestedRules

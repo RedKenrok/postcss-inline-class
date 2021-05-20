@@ -10,8 +10,9 @@
     "postcss",
     "reuse",
     "apply",
-    "insert",
-    "extend"
+    "extend",
+    "inline",
+    "insert"
   ],
   "license": "MIT",
   "homepage": "https://github.com/redkenrok/node-postcss-reuse#readme",
@@ -26,6 +27,7 @@
     "access": "public"
   },
   "files": [
+    "LICENSE",
     "README.md",
     "src/"
   ],
@@ -35,6 +37,12 @@
     "test": "postcss-tape --plugin src/postcss-reuse.js"
   },
   "devDependencies": {
+    "eslint": "^7.26.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.23.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-standard": "^5.0.0",
     "postcss": "^8.2.15",
     "postcss-tape": "^6.0.1"
   },
