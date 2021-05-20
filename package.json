@@ -1,62 +1,44 @@
 {
-  "name": "@sector-labs/postcss-inline-class",
-  "version": "0.0.6",
-  "description": "Inline the declarations of other CSS classes in your CSS classes.",
-  "main": "src/index.js",
-  "repository": "https://github.com/sectorlabs/postcss-inline-class",
-  "author": "Sector Labs <open-source@sectorlabs.ro>",
-  "license": "MIT",
-  "keywords": [
-    "css",
-    "postcss",
-    "postcss-plugin",
-    "import",
-    "inline",
-    "mixin",
-    "class"
-  ],
-  "files": [
-    "src/*"
-  ],
-  "engines": {
-    "node": ">=6.0.0"
+  "author": {
+    "name": "Ron Dekker",
+    "url": "https://rondekker.com"
   },
-  "dependencies": {
-    "lodash": "latest",
-    "postcss": "^7.0.1",
-    "resolve": "^1.1.7"
+  "name": "postcss-reuse",
+  "version": "1.0.0",
+  "description": "PostCSS plugin for reusing one rule's content into another rule",
+  "keywords": [
+    "postcss",
+    "reuse",
+    "apply",
+    "insert",
+    "extend"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/redkenrok/node-postcss-reuse#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redkenrok/node-postcss-reuse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/redkenrok/node-postcss-reuse/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "README.md",
+    "src/"
+  ],
+  "main": "src/postcss-reuse.js",
+  "scripts": {
+    "lint": "eslint --fix --cache src --ext .js",
+    "test": "postcss-tape --plugin src/postcss-reuse.js"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-i-am-meticulous": "^12.0.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-prettier": "^3.1.2",
-    "postcss-tape": "^5.0.2",
-    "prettier": "^2.0.4"
+    "postcss": "^8.2.15",
+    "postcss-tape": "^6.0.1"
   },
-  "scripts": {
-    "ci": "eslint . && postcss-tape",
-    "fix": "eslint . --fix --ignore-pattern '!.tape.js'",
-    "lint": "eslint .",
-    "test": "postcss-tape --plugin src/index.js"
-  },
-  "eslintConfig": {
-    "extends": "eslint-config-i-am-meticulous",
-    "plugins": [
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "printWidth": 100,
-          "singleQuote": true,
-          "semi": true,
-          "tabWidth": 4,
-          "trailingComma": "all",
-          "useTabs": false
-        }
-      ]
-    }
+  "peerDependencies": {
+    "postcss": "^8.0.0"
   }
 }

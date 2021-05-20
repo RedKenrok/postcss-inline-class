@@ -1,15 +1,15 @@
 .a {
-    color: red;
+  color: red;
 }
 
 .b.a {
-    color: blue;
+  color: blue;
 }
 
 div.a {
-    color: blue;
+  color: blue;
 }
 
 .c {
-    @inline .a;
+  @reuse .a;
 }

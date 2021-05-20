@@ -1,23 +1,23 @@
 .a {
-    color: red;
+  color: red;
 }
 
 .b.a {
-    color: blue;
+  color: blue;
 }
 
 div.a {
-    color: blue;
+  color: blue;
 }
 
 .c {
-    color: red;
+  color: red;
 }
 
 .b.c {
-    color: blue;
+  color: blue;
 }
 
 div.c {
-    color: blue;
+  color: blue;
 }

@@ -1,4 +1,4 @@
 .a {
-    @inline .c;
-    font-size: 14px;
+  @reuse .c;
+  font-size: 14px;
 }

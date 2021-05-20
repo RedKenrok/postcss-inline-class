@@ -1,194 +1,185 @@
-[![CircleCI](https://circleci.com/gh/SectorLabs/postcss-inline-class/tree/master.svg?style=svg)](https://circleci.com/gh/SectorLabs/postcss-inline-class/tree/master)
+# PostCSS re-use
 
-# postcss-inline-class
-
-A webpack plugin to inline CSS classes in other CSS classes using postcss.
-
-## Installation
+## Install
 
 ```
-yarn add -D @sector-labs/postcss-inline-class
+$ npm install postcss-reuse
 ```
 
 ## Usage
 
-Just add `postcss-inline-class` in the list of the webpack plugins
+Add `postcss-reuse` to your list of postcss plugins.
 
-```js
+```JavaScript
 plugins: [
-    require('@sector-labs/postcss-inline-class')(),
+  'tailwindcss',
+  'postcss-reuse',
+  'postcss-preset-env',
 ]
-```
-
-## Resolving files
-
-`postcss-inline-class` uses [resolve](https://github.com/browserify/resolve) under the hood to support file resolving.
-
-```js
-plugins: [
-    require('@sector-labs/postcss-inline-class')({
-        paths: [
-            path.join(process.cwd(), '/theme/dark'),
-            path.join(process.cwd(), '/theme/default'),
-        ],
-    }),
-],
 ```
 
 ## Examples
 
-### Minimal example
+### Basic
 
-```css
+<table>
+<tr><td>Before</td><td>After</td></tr>
+<tr><td>
+
+```CSS
 .a {
-    color: red;
+  color: red;
 }
 
 .b {
-    @inline .a;
-    font-size: 14px;
+  @inline .a;
+  font-size: 14px;
 }
 ```
-becomes
-```css
+
+</td><td>
+
+```CSS
 .a {
-    color: red;
+  color: red;
 }
 
 .b {
-    color: red;
-    font-size: 14px;
+  color: red;
+  font-size: 14px;
 }
 ```
+
+</td></tr>
+</table>
 
 ### Multiple blocks
 
-```css
+<table>
+<tr><td>Before</td><td>After</td></tr>
+<tr><td>
+
+```CSS
 .a {
-    color: red;
+  color: red;
 }
 
 .a, .b {
-    font-size: 14px
+  font-size: 14px
 }
 
 .c {
-    @inline .a;
+  @inline .a;
 }
 ```
-becomes
-```css
+
+</td><td>
+
+```CSS
 .a {
-    color: red;
+  color: red;
 }
 
 .a, .b {
-    font-size: 14px
+  font-size: 14px
 }
 
 .c {
-    color: red;
-    font-size: 14px;
+  color: red;
+  font-size: 14px;
 }
 ```
 
-### Different files
-
-```css
-/* foo.css */
-
-.a {
-    color: red;
-}
-
-/* bar.css */
-
-.b {
-    @inline .a from './foo.css';
-    font-size: 14px;
-}
-```
-becomes
-```css
-/* foo.css */
-
-.a {
-    color: red;
-}
-
-/* bar.css */
-
-.b {
-    color: red;
-    font-size: 14px;
-}
-```
+</td></tr>
+</table>
 
 ### Nested
 
-```css
+<table>
+<tr><td>Before</td><td>After</td></tr>
+<tr><td>
+
+```CSS
 .foo + div.a {
-    color: red;
+  color: red;
 }
 
 .b {
-    @inline .a;
-    font-size: 14px;
+  @inline .a;
+  font-size: 14px;
 }
 ```
-becomes 
-```css
+
+</td><td>
+
+```CSS
 .foo + div.a {
-    color: red;
+  color: red;
 }
 
 .b {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .foo + div.b {
-    color: red;
+  color: red;
 }
 ```
+
+</td></tr>
+</table>
 
 ### Media queries
 
-```css
+<table>
+<tr><td>Before</td><td>After</td></tr>
+<tr><td>
+
+```CSS
 .a {
-    color: red;
+  color: red;
 }
 
 @media (min-width: 240px) {
-    .a {
-        color: green;
-    }
+  .a {
+    color: green;
+  }
 }
 
 .b {
-    @inline .a;
-    font-size: 14px;
+  @inline .a;
+  font-size: 14px;
 }
 ```
-becomes
-```css
+
+</td><td>
+
+```CSS
 .a {
-    color: red;
+  color: red;
 }
 
 @media (min-width: 240px) {
-    .a {
-        color: green;
-    }
+  .a {
+    color: green;
+  }
 }
 
 .b {
-    color: red;
-    font-size: 14px;
+  color: red;
+  font-size: 14px;
 }
 
 @media (min-width: 240px) {
-    .b {
-        color: green;
-    }
+  .b {
+    color: green;
+  }
 }
 ```
+
+</td></tr>
+</table>
+
+## Attributions
+
+Based of [Alexandru Kis](https://github.com/alexandrukis)' PostCSS plugin [@SectorLabs/postcss-inline-class](https://github.com/SectorLabs/postcss-inline-class#readme).

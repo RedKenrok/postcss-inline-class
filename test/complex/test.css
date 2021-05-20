@@ -1,36 +1,34 @@
 .parent {
-    color: beige;
+  color: beige;
 }
 
 @media (max-width: 360px) {
-    body .parent {
-        color: azure;
-    }
+  body .parent {
+    color: azure;
+  }
 }
 
 @media (max-width: 480px) {
-    .i-like-turtles > .parent {
-        color: rebeccapurple;
-    }
-
-    .i-like-turtles {
-        color: darkolivegreen;
-    }
-
-    .i-like-turtles + div.parent {
-        color: firebrick;
-    }
+  .i-like-turtles>.parent {
+    color: rebeccapurple;
+  }
+  .i-like-turtles {
+    color: darkolivegreen;
+  }
+  .i-like-turtles+div.parent {
+    color: firebrick;
+  }
 }
 
 body .i-like-turtles .parent {
-    color: red;
+  color: red;
 }
 
 body .i-like-turtles.parent {
-    caret-color: blanchedalmond;
+  caret-color: blanchedalmond;
 }
 
 .child {
-    @inline .parent;
-    font-size: 14px;
+  @reuse .parent;
+  font-size: 14px;
 }

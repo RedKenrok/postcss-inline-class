@@ -1,12 +1,12 @@
 .a {
-    color: red;
+  color: red;
 }
 
 .a, .b {
-    font-size: 14px
+  font-size: 14px
 }
 
 .c {
-    color: red;
-    font-size: 14px;
+  color: red;
+  font-size: 14px;
 }
