@@ -17,7 +17,7 @@ const plugin = (options = {}) => {
   }, options)
 
   // Cache rules here for quick lookup.
-  const rulesCache = []
+  let rulesCache
 
   /**
    * Returns all rules matching the selector.
@@ -43,6 +43,9 @@ const plugin = (options = {}) => {
   return {
     postcssPlugin: 'postcss-reuse',
 
+    Once: () => {
+      rulesCache = []
+    },
     AtRule: {
       /**
        * Inline the declarations retrieved using the given selectors.
@@ -84,6 +87,7 @@ const plugin = (options = {}) => {
             }
 
             if (newRules.length > 0) {
+              // TODO:: Recursively look up for other atRules.
               // Create a new parent rule.
               const parentRule = new AtRule({
                 name: rule.parent.name,
