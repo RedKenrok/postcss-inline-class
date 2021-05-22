@@ -42,15 +42,21 @@ body .i-like-turtles.child {
 }
 
 @media (max-width: 360px) {
+
   body .child {
     color: azure;
   }
 }
 
 @media (max-width: 480px) {
+
   .i-like-turtles>.child {
     color: rebeccapurple;
   }
+}
+
+@media (max-width: 480px) {
+
   .i-like-turtles+div.child {
     color: firebrick;
   }

@@ -1,29 +1,29 @@
 module.exports = {
   'basic/test': {
-    message: 'can inline rules from same file',
+    message: 'basic',
   },
   'copiesAllDeclarations/test': {
-    message: 'copies all statements, even if they are spread throughout multiple blocks',
+    message: 'copiesAllDeclarations',
   },
   'removesRuleIfCannotFindClass/test': {
-    message: 'removes statements that cannot be resolved',
+    message: 'removesRuleIfCannotFindClass',
   },
   'doesNotOverwriteOverlappingNames/test': {
-    message: 'does not overwrite overlapping names',
+    message: 'doesNotOverwriteOverlappingNames',
   },
-  'supportsMediaQueries/test': {
-    message: 'supports media queries',
+  'selectorWithEscapedCharacter/test': {
+    message: 'selectorWithEscapedCharacter',
   },
   'supportsCombinatorSelectors/test': {
-    message: 'supports combinator selectors',
+    message: 'supportsCombinatorSelectors',
   },
   'supportsMultipleClassSelector/test': {
-    message: 'supports multiple class selectors',
+    message: 'supportsMultipleClassSelector',
   },
   'multipleSelectors/test': {
-    message: 'resolves multiple classes',
+    message: 'multipleSelectors',
   },
   'complex/test': {
-    message: 'all combined',
+    message: 'complex',
   },
 };

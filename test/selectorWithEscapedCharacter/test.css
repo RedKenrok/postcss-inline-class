@@ -1,0 +1,15 @@
+.a\:b {
+  color: red;
+}
+
+.a\.b {
+  color: blue;
+}
+
+.c {
+  @reuse .a\:b
+}
+
+.d {
+  @reuse .a\.b
+}

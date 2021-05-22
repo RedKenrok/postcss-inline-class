@@ -1,5 +1,7 @@
 # PostCSS re-use
 
+Re-use rules by inlining other previously declared rules' content using postcss.
+
 ## Install
 
 ```
@@ -12,9 +14,19 @@ Add `postcss-reuse` to your list of postcss plugins.
 
 ```JavaScript
 plugins: [
-  'tailwindcss',
   'postcss-reuse',
-  'postcss-preset-env',
+]
+```
+
+## Options
+
+The first parameters is an options object with the following values.
+
+- `{String} atRuleName = 'reuse'` The name of the at rule.
+
+```JavaScript
+plugins: [
+  ['postcss-reuse', { atRuleName: '@inline' }],
 ]
 ```
 
@@ -32,7 +44,7 @@ plugins: [
 }
 
 .b {
-  @inline .a;
+  @reuse .a;
   font-size: 14px;
 }
 ```
@@ -69,7 +81,7 @@ plugins: [
 }
 
 .c {
-  @inline .a;
+  @reuse .a;
 }
 ```
 
@@ -105,7 +117,7 @@ plugins: [
 }
 
 .b {
-  @inline .a;
+  @reuse .a;
   font-size: 14px;
 }
 ```
@@ -147,7 +159,7 @@ plugins: [
 }
 
 .b {
-  @inline .a;
+  @reuse .a;
   font-size: 14px;
 }
 ```
@@ -179,7 +191,3 @@ plugins: [
 
 </td></tr>
 </table>
-
-## Attributions
-
-Based of [Alexandru Kis](https://github.com/alexandrukis)' PostCSS plugin [@SectorLabs/postcss-inline-class](https://github.com/SectorLabs/postcss-inline-class#readme).
