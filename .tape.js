@@ -2,14 +2,32 @@ module.exports = {
   'basic/test': {
     message: 'basic',
   },
+  'complex/test': {
+    message: 'complex',
+  },
   'copiesAllDeclarations/test': {
     message: 'copiesAllDeclarations',
   },
-  'removesRuleIfCannotFindClass/test': {
-    message: 'removesRuleIfCannotFindClass',
-  },
   'doesNotOverwriteOverlappingNames/test': {
     message: 'doesNotOverwriteOverlappingNames',
+  },
+  'modeClass/test': {
+    message: 'modeClass',
+    options: {
+      mode: 'class',
+    },
+  },
+  'modeClassEscaping/test': {
+    message: 'modeClassEscaping',
+    options: {
+      mode: 'class',
+    },
+  },
+  'multipleSelectors/test': {
+    message: 'multipleSelectors',
+  },
+  'removesRuleIfCannotFindClass/test': {
+    message: 'removesRuleIfCannotFindClass',
   },
   'selectorWithEscapedCharacter/test': {
     message: 'selectorWithEscapedCharacter',
@@ -19,11 +37,5 @@ module.exports = {
   },
   'supportsMultipleClassSelector/test': {
     message: 'supportsMultipleClassSelector',
-  },
-  'multipleSelectors/test': {
-    message: 'multipleSelectors',
-  },
-  'complex/test': {
-    message: 'complex',
   },
 };

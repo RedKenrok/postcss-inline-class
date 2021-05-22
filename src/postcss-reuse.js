@@ -14,6 +14,7 @@ const plugin = (options = {}) => {
   // Merge options with default.
   options = Object.assign({
     atRuleName: 'reuse',
+    mode: 'selector', // 'class' or 'selector'.
   }, options)
 
   // Cache rules here for quick lookup.
@@ -23,6 +24,7 @@ const plugin = (options = {}) => {
    * Returns all rules matching the selector.
    */
   const getMatchingRules = (selector) => {
+    // TODO: Very slow way of finding matches.
     const matchedRules = []
     for (const rule of rulesCache) {
       const matchedSelectors = []
@@ -56,8 +58,12 @@ const plugin = (options = {}) => {
         let parentTail = atRule.parent
 
         // Split selector.
-        const selectors = utilList.comma(atRule.params)
-        for (const selector of selectors) {
+        const selectors = (options.mode === 'class') ? utilList.space(atRule.params) : utilList.comma(atRule.params)
+        for (let selector of selectors) {
+          // Convert from class to selector.
+          if (options.mode === 'class') {
+            selector = utilSelector.fromClass(selector)
+          }
           const rules = getMatchingRules(selector)
           for (const rule of rules) {
             // Clone nodes.
@@ -87,7 +93,7 @@ const plugin = (options = {}) => {
             }
 
             if (newRules.length > 0) {
-              // TODO:: Recursively look up for other atRules.
+              // TODO: Look up for other atRules.
               // Create a new parent rule.
               const parentRule = new AtRule({
                 name: rule.parent.name,

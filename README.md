@@ -23,10 +23,14 @@ plugins: [
 The first parameters is an options object with the following values.
 
 - `{String} atRuleName = 'reuse'` The name of the at rule.
+- `{String} mode = 'selector'` The way the at rule's parameter is parsed. Can be either `'selector'` or `'class'`. In selector mode the parameters are parsed as a comma separated list of selectors. In class mode the parameter are parsed as a space separated list of class names.
 
 ```JavaScript
 plugins: [
-  ['postcss-reuse', { atRuleName: '@inline' }],
+  ['postcss-reuse', {
+    atRuleName: '@inline',
+    mode: 'class',
+  }],
 ]
 ```
 

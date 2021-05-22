@@ -4,7 +4,7 @@
     "url": "https://rondekker.com"
   },
   "name": "postcss-reuse",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "PostCSS plugin for reusing one rule's content into another rule",
   "keywords": [
     "postcss",

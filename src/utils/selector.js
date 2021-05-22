@@ -1,5 +1,9 @@
 const utilList = require('./list.js')
 
+const fromClass = (className) => {
+  return '.' + className.replaceAll('.', '\\.').replaceAll(':', '\\:')
+}
+
 const replace = (selector, oldSegment, newSegment) => {
   return utilList
     .space(selector)
@@ -16,5 +20,6 @@ const replace = (selector, oldSegment, newSegment) => {
 }
 
 module.exports = {
+  fromClass: fromClass,
   replace: replace,
 }
