@@ -28,6 +28,9 @@ module.exports = {
   },
   'removesRuleIfCannotFindClass/test': {
     message: 'removesRuleIfCannotFindClass',
+    warnings: {
+      text: 'No rules found matching selector: ".c".',
+    },
   },
   'selectorWithEscapedCharacter/test': {
     message: 'selectorWithEscapedCharacter',

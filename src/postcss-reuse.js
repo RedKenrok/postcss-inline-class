@@ -24,7 +24,6 @@ const plugin = (options = {}) => {
    * Returns all rules matching the selector.
    */
   const getMatchingRules = (selector) => {
-    // TODO: Very slow way of finding matches.
     const matchedRules = []
     for (const rule of rulesCache) {
       const matchedSelectors = []
@@ -33,7 +32,7 @@ const plugin = (options = {}) => {
           matchedSelectors.push(ruleSelector)
         }
       }
-      if (matchedSelectors.length >= 0) {
+      if (matchedSelectors.length > 0) {
         matchedRules.push(Object.assign(rule, {
           matchedSelectors: matchedSelectors,
         }))
@@ -52,7 +51,7 @@ const plugin = (options = {}) => {
       /**
        * Inline the declarations retrieved using the given selectors.
        */
-      [options.atRuleName]: (atRule, { AtRule, Rule }) => {
+      [options.atRuleName]: (atRule, { AtRule, Rule, result }) => {
         const declarations = []
         let tail = atRule.parent
         let parentTail = atRule.parent
@@ -65,6 +64,10 @@ const plugin = (options = {}) => {
             selector = utilSelector.fromClass(selector)
           }
           const rules = getMatchingRules(selector)
+          if (rules.length === 0) {
+            result.warn('No rules found matching selector: "' + selector + '".')
+          }
+
           for (const rule of rules) {
             // Clone nodes.
             const nodes = rule.nodes.map(node => node.clone())
