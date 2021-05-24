@@ -35,6 +35,12 @@ module.exports = {
   'selectorWithEscapedCharacter/test': {
     message: 'selectorWithEscapedCharacter',
   },
+  'supportsMediaQueries/test': {
+    message: 'supportsMediaQueries',
+  },
+  'supportsMediaQueriesMultiple/test': {
+    message: 'supportsMediaQueriesMultiple',
+  },
   'supportsCombinatorSelectors/test': {
     message: 'supportsCombinatorSelectors',
   },

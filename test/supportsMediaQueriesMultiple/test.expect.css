@@ -12,11 +12,20 @@
   .a {
     color: blue;
   }
+  .d {
+    display: block;
+  }
+}
+
+@media (min-width: 480px) {
+  .d {
+    color: red;
+  }
 }
 
 .b {
   color: red;
-  background-color: yellow;
+  font-size: 12px;
 }
 
 @media (min-width: 240px) {
@@ -30,5 +39,23 @@
 
   .b {
     color: blue;
+  }
+}
+
+.c {
+  font-size: 16px;
+}
+
+@media (min-width: 360px) {
+
+  .c {
+    display: block;
+  }
+}
+
+@media (min-width: 480px) {
+
+  .c {
+    color: red;
   }
 }

@@ -52,9 +52,15 @@ const plugin = (options = {}) => {
        * Inline the declarations retrieved using the given selectors.
        */
       [options.atRuleName]: (atRule, { AtRule, Rule, result }) => {
+        // Exit early if at rule not in a valid parent.
+        if (!atRule.parent || atRule.parent.type !== 'rule') {
+          result.warn('Parent of at rule not of type rule.')
+          return
+        }
+
         const declarations = []
-        let tail = atRule.parent
-        let parentTail = atRule.parent
+        let ruleTail = atRule.parent
+        let rootTail = atRule.parent
 
         // Split selector.
         const selectors = (options.mode === 'class') ? utilList.space(atRule.params) : utilList.comma(atRule.params)
@@ -75,7 +81,7 @@ const plugin = (options = {}) => {
             const newRules = []
             for (const matchedSelector of rule.matchedSelectors) {
               // If no parent to keep in mind that simply add to the replacement list.
-              if (matchedSelector === selector) {
+              if (matchedSelector === selector && !rule.parent) {
                 declarations.push(...nodes)
                 continue
               }
@@ -87,8 +93,8 @@ const plugin = (options = {}) => {
               })
 
               if (!rule.parent) {
-                atRule.parent.parent.insertAfter(tail, newRule)
-                tail = newRule
+                ruleTail.parent.insertAfter(ruleTail, newRule)
+                ruleTail = newRule
                 continue
               }
 
@@ -106,8 +112,8 @@ const plugin = (options = {}) => {
               })
 
               // Add parent after current tail.
-              atRule.parent.parent.insertAfter(parentTail, parentRule)
-              parentTail = parentRule
+              rootTail.parent.insertAfter(rootTail, parentRule)
+              rootTail = parentRule
             }
           }
         }

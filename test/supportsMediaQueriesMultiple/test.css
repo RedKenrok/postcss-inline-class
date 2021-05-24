@@ -12,9 +12,23 @@
   .a {
     color: blue;
   }
+  .d {
+    display: block;
+  }
+}
+
+@media (min-width: 480px) {
+  .d {
+    color: red;
+  }
 }
 
 .b {
   @reuse .a;
-  background-color: yellow;
+  font-size: 12px;
+}
+
+.c {
+  @reuse .d;
+  font-size: 16px;
 }
