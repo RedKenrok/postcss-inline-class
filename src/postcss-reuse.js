@@ -23,21 +23,38 @@ const plugin = (options = {}) => {
   /**
    * Returns all rules matching the selector.
    */
-  const getMatchingRules = (selector) => {
+  const getMatchingRules = (selectorParse) => {
     const matchedRules = []
+
     for (const rule of rulesCache) {
+      // Lazily parse selectors.
+      if (!rule.selectorsParsed) {
+        rule.selectorsParsed = utilSelector.parse(rule.selectors).nodes
+      }
+
+      // Find matches with the rule's selectors.
       const matchedSelectors = []
-      for (const ruleSelector of rule.selectors) {
-        if (ruleSelector.indexOf(selector) >= 0) {
-          matchedSelectors.push(ruleSelector)
+      for (const ruleSelector of rule.selectorsParsed) {
+        const ranges = utilSelector.getRanges(selectorParse.nodes, ruleSelector.nodes)
+        if (ranges.length > 0) {
+          matchedSelectors.push(
+            Object.assign({}, ruleSelector, {
+              ranges: ranges,
+            })
+          )
         }
       }
+
+      // If a match is found add the rule to the results.
       if (matchedSelectors.length > 0) {
-        matchedRules.push(Object.assign(rule, {
-          matchedSelectors: matchedSelectors,
-        }))
+        matchedRules.push(
+          Object.assign({}, rule, {
+            matchedSelectors: matchedSelectors,
+          })
+        )
       }
     }
+
     return matchedRules
   }
 
@@ -58,6 +75,7 @@ const plugin = (options = {}) => {
           return
         }
 
+        const atRuleSelectorParsed = utilSelector.parse(atRule.parent.selectors)
         const declarations = []
         let ruleTail = atRule.parent
         let rootTail = atRule.parent
@@ -69,7 +87,9 @@ const plugin = (options = {}) => {
           if (options.mode === 'class') {
             selector = utilSelector.fromClass(selector)
           }
-          const rules = getMatchingRules(selector)
+          const selectorParse = utilSelector.parse(selector).nodes[0]
+
+          const rules = getMatchingRules(selectorParse)
           if (rules.length === 0) {
             result.warn('No rules found matching selector: "' + selector + '".')
           }
@@ -81,14 +101,16 @@ const plugin = (options = {}) => {
             const newRules = []
             for (const matchedSelector of rule.matchedSelectors) {
               // If no parent to keep in mind that simply add to the replacement list.
-              if (matchedSelector === selector && !rule.parent) {
+              if (!rule.parent && matchedSelector.ranges.length === 1 && matchedSelector.ranges[0][0] === 0 && matchedSelector.ranges[0][1] === (matchedSelector.nodes.length - 1)) {
                 declarations.push(...nodes)
                 continue
               }
 
+              let newSelector = utilSelector.replace(matchedSelector, matchedSelector.ranges, atRuleSelectorParsed.nodes)
+              newSelector = utilSelector.stringify(newSelector)
               const newRule = new Rule({
                 nodes: nodes,
-                selector: utilSelector.replace(matchedSelector, selector, atRule.parent.selector),
+                selector: newSelector,
                 type: atRule.parent.type,
               })
 

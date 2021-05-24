@@ -1,0 +1,8 @@
+div.c {
+  color: red;
+}
+
+.d {
+  @reuse .c;
+  background-color: yellow;
+}

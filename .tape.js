@@ -1,4 +1,7 @@
 module.exports = {
+  '_dev/test': {
+    message: '_dev',
+  },
   'basic/test': {
     message: 'basic',
   },
@@ -26,10 +29,19 @@ module.exports = {
   'multipleSelectors/test': {
     message: 'multipleSelectors',
   },
-  'removesRuleIfCannotFindClass/test': {
-    message: 'removesRuleIfCannotFindClass',
+  'removesRuleIfNotFound/test': {
+    message: 'removesRuleIfNotFound',
     warnings: {
       text: 'No rules found matching selector: ".c".',
+    },
+  },
+  'renameSelectors/test': {
+    message: 'renameSelectors',
+  },
+  'renameSelectorsModeClass/test': {
+    message: 'renameSelectorsModeClass',
+    options: {
+      mode: 'class',
     },
   },
   'selectorWithEscapedCharacter/test': {
@@ -47,4 +59,6 @@ module.exports = {
   'supportsMultipleClassSelector/test': {
     message: 'supportsMultipleClassSelector',
   },
+  /*
+  */
 };
