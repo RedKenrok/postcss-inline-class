@@ -1,7 +1,4 @@
 module.exports = {
-  '_dev/test': {
-    message: '_dev',
-  },
   'basic/test': {
     message: 'basic',
   },
@@ -59,6 +56,4 @@ module.exports = {
   'supportsMultipleClassSelector/test': {
     message: 'supportsMultipleClassSelector',
   },
-  /*
-  */
 };

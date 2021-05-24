@@ -1,4 +1,4 @@
-div.c {
+div.c:last-child {
   color: red;
 }
 
@@ -6,6 +6,6 @@ div.c {
   background-color: yellow;
 }
 
-div.d {
+div.d:last-child {
   color: red;
 }

@@ -1,4 +1,4 @@
-const utilList = require('./utils/list.js')
+const utilSplit = require('./utils/split.js')
 const utilSelector = require('./utils/selector.js')
 
 /**
@@ -81,7 +81,7 @@ const plugin = (options = {}) => {
         let rootTail = atRule.parent
 
         // Split selector.
-        const selectors = (options.mode === 'class') ? utilList.space(atRule.params) : utilList.comma(atRule.params)
+        const selectors = (options.mode === 'class') ? utilSplit.space(atRule.params) : utilSplit.comma(atRule.params)
         for (let selector of selectors) {
           // Convert from class to selector.
           if (options.mode === 'class') {

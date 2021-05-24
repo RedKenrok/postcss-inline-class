@@ -1,4 +1,4 @@
-div.a {
+div.a:last-child {
   color: blue;
 }
 

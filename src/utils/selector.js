@@ -1,16 +1,5 @@
-const utilList = require('./list.js')
+const utilSplit = require('./split.js')
 const tokenizer = require('css-selector-tokenizer')
-
-const VALID_NODE_TYPES = [
-  'attribute',
-  'class',
-  'element',
-  'id',
-  'pseudo-element',
-  'nested-pseudo-class',
-  'operator',
-  'spacing',
-]
 
 /**
  * Find start and end indices of one node list in another node list.
@@ -119,7 +108,7 @@ const match = (a, b) => {
  * Check if node lists fully match.
  * @param {Array} aNodes Node list a.
  * @param {Array} bNodes Node list b.
- * @returns {Boolean} Whether the node lists match/
+ * @returns {Boolean} Whether the node lists match.
  */
 const matchAll = (aNodes, bNodes) => {
   if (aNodes.length !== bNodes.length) {
@@ -148,7 +137,7 @@ const parse = (selectors, selectorsSplit = null) => {
       selectorsSplit = selectors
       selectors = selectors.join(', ')
     } else {
-      selectorsSplit = utilList.comma(selectors)
+      selectorsSplit = utilSplit.comma(selectors)
     }
   }
 
@@ -158,11 +147,13 @@ const parse = (selectors, selectorsSplit = null) => {
 
     // Store selector node.
     rootNode.selector = selectorsSplit[i]
-
     // Remove nodes with invalid type.
     for (let i = rootNode.nodes.length - 1; i >= 0; i--) {
-      if (!VALID_NODE_TYPES.includes(rootNode.nodes[i].type)) {
-        rootNode.nodes.splice(i, 1)
+      // If the node after or before is an operator then remove the space.
+      if (rootNode.nodes[i].type === 'spacing') {
+        if ((i > 0 && rootNode.nodes[i - 1].type === 'operator') || (i < (rootNode.nodes.length - 1) && rootNode.nodes[i + 1].type === 'operator')) {
+          rootNode.nodes.splice(i, 1)
+        }
       }
     }
   }
