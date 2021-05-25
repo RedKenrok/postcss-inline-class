@@ -83,7 +83,7 @@ module.exports = {
     options: {
       // The following extractor is the same as the default, except it includes cut off points for semicolons.
       defaultExtractor: (line) => {
-        return [...(line.match(/[^<>"'`;,\s]*[^<>"'`;\s:]/g) || []), ...(line.match(/[^<>"'`;,\s.(){}[\]#=%]*[^<>"'`;\s.(){}[\]#=%:]/g) || [])]
+        return [...(line.match(/[^<>"'`;\s]*[^<>"'`;\s:]/g) || []), ...(line.match(/[^<>"'`;\s.(){}[\]#=%]*[^<>"'`;\s.(){}[\]#=%:]/g) || [])]
       },
     }
   },
