@@ -50,9 +50,6 @@ module.exports = {
   'supportsMediaQueriesMultiple/test': {
     message: 'supportsMediaQueriesMultiple',
   },
-  'supportsCombinatorSelectors/test': {
-    message: 'supportsCombinatorSelectors',
-  },
   'supportsMultipleClassSelector/test': {
     message: 'supportsMultipleClassSelector',
   },

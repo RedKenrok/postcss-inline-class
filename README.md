@@ -2,6 +2,40 @@
 
 Re-use rules by inlining other previously declared rules' content using postcss.
 
+<table>
+<tr><td>Before</td><td>After</td></tr>
+<tr><td>
+
+```CSS
+.a {
+  color: red;
+}
+
+.b {
+  @reuse .a;
+  font-size: 14px;
+}
+```
+
+</td><td>
+
+```CSS
+.a {
+  color: red;
+}
+
+.b {
+  color: red;
+  font-size: 14px;
+}
+```
+
+</td></tr>
+</table>
+
+> [More examples](#examples)
+
+
 ## Install
 
 ```
@@ -34,40 +68,29 @@ plugins: [
 ]
 ```
 
+### Tailwindcss JIT
+
+As of writing this [Tailwindcss](https://github.com/tailwindlabs/tailwindcss#readme)'s JIT mode does not support using the @apply rule for custom classes. This plugin can solve this by setting the plugin to `'class'` mode and applying the following options to your Tailwind config.
+
+```JS
+module.exports = {
+  mode: 'jit',
+
+  purge: {
+    content: [
+      // TODO: Add the paths to the style sheets where you will be using the reuse plugin. Otherwise tailwind will not read what classes need to be generated.
+    ],
+    options: {
+      // The following extractor is the same as the default, except it includes cut off points for semicolons.
+      defaultExtractor: (line) => {
+        return [...(line.match(/[^<>"'`;,\s]*[^<>"'`;\s:]/g) || []), ...(line.match(/[^<>"'`;,\s.(){}[\]#=%]*[^<>"'`;\s.(){}[\]#=%:]/g) || [])]
+      },
+    }
+  },
+}
+```
+
 ## Examples
-
-### Basic
-
-<table>
-<tr><td>Before</td><td>After</td></tr>
-<tr><td>
-
-```CSS
-.a {
-  color: red;
-}
-
-.b {
-  @reuse .a;
-  font-size: 14px;
-}
-```
-
-</td><td>
-
-```CSS
-.a {
-  color: red;
-}
-
-.b {
-  color: red;
-  font-size: 14px;
-}
-```
-
-</td></tr>
-</table>
 
 ### Multiple blocks
 
