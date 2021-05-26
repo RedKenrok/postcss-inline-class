@@ -70,7 +70,30 @@ plugins: [
 
 ### Tailwindcss JIT
 
-As of writing this [Tailwindcss](https://github.com/tailwindlabs/tailwindcss#readme)'s JIT mode does not support using the @apply rule for custom classes. This plugin can solve this by setting the plugin to `'class'` mode and applying the following options to your Tailwind config.
+As of writing this [Tailwindcss](https://github.com/tailwindlabs/tailwindcss#readme)'s JIT mode does not support using the @apply rule for custom classes. This plugin can solve this issue all you need to do is the following:
+
+First set the mode option of this plugin to `'class'`.
+
+```JavaScript
+plugins: [
+  ['postcss-reuse', {
+    mode: 'class',
+  }],
+]
+```
+
+Then add the `@tailwind screens;` directive after your other tailwind directives and before your custom classes. Otherwise the plugin will not be able to inherit the responsive versions of the classes.
+
+```CSS
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind screens;
+
+/* TODO: Your custom CSS here with any @reuse rules. */
+```
+
+Finally ensure the following options are set in your Tailwind config.
 
 ```JS
 module.exports = {
@@ -78,10 +101,10 @@ module.exports = {
 
   purge: {
     content: [
-      // TODO: Add the paths to the style sheets where you will be using the reuse plugin. Otherwise tailwind will not read what classes need to be generated.
+      // TODO: Add the paths to the style sheets where you will be using the reuse plugin. Otherwise tailwind will not read what classes you want to reuse.
     ],
     options: {
-      // The following extractor is the same as the default, except it includes cut off points for semicolons.
+      // The following extractor is the same as the default of v2, except it includes cut off points for semicolons.
       defaultExtractor: (line) => {
         return [...(line.match(/[^<>"'`;\s]*[^<>"'`;\s:]/g) || []), ...(line.match(/[^<>"'`;\s.(){}[\]#=%]*[^<>"'`;\s.(){}[\]#=%:]/g) || [])]
       },
