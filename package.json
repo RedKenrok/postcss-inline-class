@@ -4,7 +4,7 @@
     "url": "https://rondekker.com"
   },
   "name": "postcss-reuse",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "PostCSS plugin for reusing one rule's content into another rule",
   "keywords": [
     "postcss",
@@ -15,13 +15,13 @@
     "insert"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/redkenrok/node-postcss-reuse#readme",
+  "homepage": "https://github.com/redkenrok/postcss-reuse#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/redkenrok/node-postcss-reuse.git"
+    "url": "git+https://github.com/redkenrok/postcss-reuse.git"
   },
   "bugs": {
-    "url": "https://github.com/redkenrok/node-postcss-reuse/issues"
+    "url": "https://github.com/redkenrok/postcss-reuse/issues"
   },
   "publishConfig": {
     "access": "public"
