@@ -58,7 +58,7 @@ const getRanges = (findNodes, scanNodes) => {
  * @returns {String} Selector.
  */
 const fromClass = (className) => {
-  return '.' + className.replaceAll('.', '\\.').replaceAll(':', '\\:')
+  return '.' + className.replace(/\./g, '\\.').replace(/:/g, '\\:')
 }
 
 const match = (a, b) => {

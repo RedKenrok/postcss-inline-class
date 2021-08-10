@@ -4,7 +4,7 @@
     "url": "https://rondekker.com"
   },
   "name": "postcss-reuse",
-  "version": "2.1.7",
+  "version": "2.1.9",
   "description": "PostCSS plugin for reusing one rule's content into another rule",
   "keywords": [
     "postcss",
@@ -37,19 +37,19 @@
     "test": "postcss-tape --plugin src/postcss-reuse.js"
   },
   "devDependencies": {
-    "eslint": "^7.26.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.23.0",
+    "eslint": "^7.31.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-standard": "^5.0.0",
-    "postcss": "^8.2.15",
+    "postcss": "^8.3.6",
     "postcss-tape": "^6.0.1"
   },
   "peerDependencies": {
     "postcss": "^8.0.0"
   },
   "dependencies": {
-    "css-selector-tokenizer": "^0.7.3"
+    "css-selector-tokenizer": "^0.8.0"
   }
 }
