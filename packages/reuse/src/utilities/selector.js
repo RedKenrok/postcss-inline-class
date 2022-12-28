@@ -151,7 +151,13 @@ const parse = (selectors, selectorsSplit = null) => {
     for (let i = rootNode.nodes.length - 1; i >= 0; i--) {
       // If the node after or before is an operator then remove the space.
       if (rootNode.nodes[i].type === 'spacing') {
-        if ((i > 0 && rootNode.nodes[i - 1].type === 'operator') || (i < (rootNode.nodes.length - 1) && rootNode.nodes[i + 1].type === 'operator')) {
+        if (
+          i > 0 && rootNode.nodes[i - 1].type === 'operator' ||
+          (
+            i < (rootNode.nodes.length - 1) &&
+            rootNode.nodes[i + 1].type === 'operator'
+          )
+        ) {
           rootNode.nodes.splice(i, 1)
         }
       }

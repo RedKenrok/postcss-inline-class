@@ -3,7 +3,7 @@ const comma = (string) => {
 }
 
 const space = (string) => {
-  return split(string, [' ', '\n', '\t'])
+  return split(string, [' ', '\n', '\r', '\t'])
 }
 
 const split = (string, separators, last) => {
@@ -29,13 +29,19 @@ const split = (string, separators, last) => {
     } else if (letter === '(') {
       func += 1
     } else if (letter === ')') {
-      if (func > 0) func -= 1
+      if (func > 0) {
+        func -= 1
+      }
     } else if (func === 0) {
-      if (separators.includes(letter)) split = true
+      if (separators.includes(letter)) {
+        split = true
+      }
     }
 
     if (split) {
-      if (current !== '') array.push(current.trim())
+      if (current !== '') {
+        array.push(current.trim())
+      }
       current = ''
       split = false
     } else {
@@ -43,7 +49,9 @@ const split = (string, separators, last) => {
     }
   }
 
-  if (last || current !== '') array.push(current.trim())
+  if (last || current !== '') {
+    array.push(current.trim())
+  }
   return array
 }
 

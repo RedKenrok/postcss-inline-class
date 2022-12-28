@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Ron Dekker",
+    "url": "https://rondekker.com"
+  },
+  "name": "postcss-reuse",
+  "version": "2.1.9",
+  "description": "PostCSS plugin for re-using one rule's content into another rule.",
+  "keywords": [
+    "postcss",
+    "reuse",
+    "apply",
+    "extend",
+    "inline",
+    "insert"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/redkenrok/postcss-plugins/tree/main/packages/reuse/#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redkenrok/postcss-plugins.git"
+  },
+  "bugs": {
+    "url": "https://github.com/redkenrok/postcss-plugins/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "README.md",
+    "src/"
+  ],
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --fix --cache src --ext .js",
+    "test": "postcss-tape --plugin src/index.js"
+  },
+  "peerDependencies": {
+    "postcss": "8.x"
+  },
+  "dependencies": {
+    "css-selector-tokenizer": "0.8.x"
+  }
+}

@@ -1,0 +1,11 @@
+div.a:last-child {
+  color: blue;
+}
+
+.b {
+  background-color: yellow;
+}
+
+div.b:last-child {
+  color: blue;
+}

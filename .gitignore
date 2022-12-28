@@ -20,8 +20,6 @@ node_modules/
 .eslintcache
 # Yarn Integrity file
 .yarn-integrity
-# Test files
-test/**/*.result.css
 # Coverage directories
 coverage
 *.lcov
@@ -30,3 +28,8 @@ coverage
 # dotenv environment variables file
 .env
 .env.test
+
+# Test files
+packages/test/**/*.result.css
+# Test project
+packages/caret

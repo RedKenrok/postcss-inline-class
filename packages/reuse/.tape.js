@@ -53,4 +53,4 @@ module.exports = {
   'supportsMultipleClassSelector/test': {
     message: 'supportsMultipleClassSelector',
   },
-};
+}

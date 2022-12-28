@@ -1,28 +1,26 @@
-const utilSplit = require('./utils/split.js')
-const utilSelector = require('./utils/selector.js')
+const utilSplit = require('./utilities/split.js')
+const utilSelector = require('./utilities/selector.js')
 
-/**
- * Create plugin instance.
- * @param {Object} options plugin options.
- * @returns Plugin instance.
- */
 const plugin = (options = {}) => {
-  if (options && options.atRuleName) {
-    // Ensure at rule name is lowercase.
-    options.atRuleName = options.atRuleName.toLowerCase()
+  if (options) {
+    if (typeof (options) !== 'object' || Array.isArray(options)) {
+      throw new Error('Plugin options are of an invalid type.')
+    }
+    if (options.atRuleName) {
+      // Ensure at rule name is lowercase.
+      options.atRuleName = options.atRuleName.toLowerCase()
+    }
   }
   // Merge options with default.
   options = Object.assign({
     atRuleName: 'reuse',
     mode: 'selector', // 'class' or 'selector'.
-  }, options)
+  }, options ? options : {})
 
   // Cache rules here for quick lookup.
   let rulesCache
 
-  /**
-   * Returns all rules matching the selector.
-   */
+  // Returns all rules matching the selector.
   const getMatchingRules = (selectorParse) => {
     const matchedRules = []
 
@@ -64,10 +62,9 @@ const plugin = (options = {}) => {
     Once: () => {
       rulesCache = []
     },
+
     AtRule: {
-      /**
-       * Inline the declarations retrieved using the given selectors.
-       */
+      // Inline the declarations retrieved using the given selectors.
       [options.atRuleName]: (atRule, { AtRule, Rule, result }) => {
         // Exit early if at rule not in a valid parent.
         if (!atRule.parent || atRule.parent.type !== 'rule') {
@@ -124,7 +121,6 @@ const plugin = (options = {}) => {
             }
 
             if (newRules.length > 0) {
-              // TODO: Look up for other atRules.
               // Create a new parent rule.
               const parentRule = new AtRule({
                 name: rule.parent.name,
@@ -144,9 +140,8 @@ const plugin = (options = {}) => {
         atRule.replaceWith(declarations)
       },
     },
-    /**
-     * Cache all nodes by its selector for easy look up later.
-     */
+
+    // Cache all nodes by its selector for easy look up later.
     RuleExit (rule) {
       // Check if rule has nodes.
       if (!rule.nodes || rule.nodes.length === 0) {
