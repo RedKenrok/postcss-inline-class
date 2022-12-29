@@ -30,6 +30,6 @@ coverage
 .env.test
 
 # Test files
-packages/test/**/*.result.css
+test.result.css
 # Test project
 packages/caret
