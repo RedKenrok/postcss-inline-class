@@ -65,7 +65,7 @@ const plugin = (options = {}) => {
 
     AtRule: {
       // Inline the declarations retrieved using the given selectors.
-      [options.atRuleName]: (atRule, { AtRule, Rule, result }) => {
+      [options.atRuleName]: async (atRule, { AtRule, Rule, result }) => {
         // Exit early if at rule not in a valid parent.
         if (!atRule.parent || atRule.parent.type !== 'rule') {
           result.warn('Parent of at rule not of type rule.')
@@ -142,7 +142,7 @@ const plugin = (options = {}) => {
     },
 
     // Cache all nodes by its selector for easy look up later.
-    RuleExit (rule) {
+    RuleExit: async (rule) => {
       // Check if rule has nodes.
       if (!rule.nodes || rule.nodes.length === 0) {
         return

@@ -4,10 +4,11 @@
     "url": "https://rondekker.com"
   },
   "name": "postcss-reuse",
-  "version": "2.1.10",
-  "description": "PostCSS plugin for re-using one rule's content into another rule.",
+  "version": "2.2.0",
+  "description": "PostCSS plugin for re-using selectors and declarations using previously declared selectors.",
   "keywords": [
     "postcss",
+    "postcss-plugin",
     "reuse",
     "apply",
     "extend",
@@ -27,6 +28,7 @@
     "access": "public"
   },
   "files": [
+    "CHANGELOG.md",
     "README.md",
     "src/"
   ],

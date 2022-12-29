@@ -1,6 +1,6 @@
 # PostCSS re-use
 
-PostCSS plugin for re-using rules by inlining other previously declared rules' content.
+PostCSS plugin for re-using CSS selectors and declarations using previously declared selectors.
 
 <table>
 <tr><td>Before</td><td>After</td></tr>
