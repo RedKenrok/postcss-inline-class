@@ -4,7 +4,7 @@
     "url": "https://rondekker.com"
   },
   "name": "postcss-or",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PostCSS plugin for adding an or pseudo-class.",
   "keywords": [
     "postcss",

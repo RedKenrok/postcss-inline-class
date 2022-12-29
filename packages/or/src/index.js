@@ -20,7 +20,7 @@ const plugin = (options = {}) => {
   }, options ? options : {})
 
   return {
-    postcssPlugin: 'postcss-reuse',
+    postcssPlugin: 'postcss-or',
 
     Rule: (rule, { result }) => {
       let selectorsFinal = []
