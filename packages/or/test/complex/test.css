@@ -1,0 +1,12 @@
+*:or(.a, .b) {
+  color: red;
+}
+
+div:or(.a, .b),
+span:or(.c, .d) {
+  color: blue;
+}
+
+div:or(.a, > span:or(.c, .d)) {
+  color: blue;
+}

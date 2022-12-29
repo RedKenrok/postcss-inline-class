@@ -1,0 +1,3 @@
+*:or(.a, .b) {
+  color: red;
+}

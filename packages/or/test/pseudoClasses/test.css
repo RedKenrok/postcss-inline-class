@@ -1,0 +1,3 @@
+*:or(:first-child, :last-child) {
+  color: red;
+}

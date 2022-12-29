@@ -1,0 +1,17 @@
+*.a,
+*.b {
+  color: red;
+}
+
+div.a,
+div.b,
+span.c,
+span.d {
+  color: blue;
+}
+
+div.a,
+div> span.c,
+div> span.d {
+  color: blue;
+}

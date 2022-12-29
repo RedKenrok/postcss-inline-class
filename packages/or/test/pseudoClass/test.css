@@ -1,0 +1,3 @@
+*:or(.a, :first-child) {
+  color: red;
+}

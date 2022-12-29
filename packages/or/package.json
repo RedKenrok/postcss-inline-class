@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "Ron Dekker",
+    "url": "https://rondekker.com"
+  },
+  "name": "postcss-or",
+  "version": "1.0.0",
+  "description": "PostCSS plugin for adding an or pseudo-class.",
+  "keywords": [
+    "postcss",
+    "or"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/redkenrok/postcss-plugins/tree/main/packages/or/#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redkenrok/postcss-plugins.git"
+  },
+  "bugs": {
+    "url": "https://github.com/redkenrok/postcss-plugins/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "README.md",
+    "src/"
+  ],
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --fix --cache src --ext .js",
+    "test": "postcss-tape --plugin src/index.js"
+  },
+  "peerDependencies": {
+    "postcss": "8.x"
+  },
+  "dependencies": {}
+}
