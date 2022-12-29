@@ -4,10 +4,12 @@
     "url": "https://rondekker.com"
   },
   "name": "postcss-or",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "PostCSS plugin for adding an or pseudo-class.",
   "keywords": [
     "postcss",
+    "postcss-plugin",
+    "any",
     "or"
   ],
   "license": "MIT",
@@ -23,6 +25,7 @@
     "access": "public"
   },
   "files": [
+    "CHANGELOG.md",
     "README.md",
     "src/"
   ],

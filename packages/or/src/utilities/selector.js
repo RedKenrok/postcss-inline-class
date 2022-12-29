@@ -44,9 +44,10 @@ const getPseudoClass = (selector, pseudoClassName) => {
 /**
  * Split selector on comma.
  * @param {string} selector Selector to split
+ * @param {boolean} trim Whether to trim the selector.
  * @returns {Array<string>} Array of selectors.
  */
-const splitSelectors = (selector) => {
+const splitSelectors = (selector, trim = true) => {
   const selectors = []
 
   let parenthesis = 0
@@ -65,14 +66,22 @@ const splitSelectors = (selector) => {
     }
 
     if (parenthesis === 0 && selector[i] === ',') {
-      selectors.push(selectorTemp.trim())
+      if (trim) {
+        selectorTemp = selectorTemp.trim()
+      }
+
+      selectors.push(selectorTemp)
       selectorTemp = ''
       continue
     }
 
     selectorTemp += selector[i]
   }
-  selectors.push(selectorTemp.trim())
+
+  if (trim) {
+    selectorTemp = selectorTemp.trim()
+  }
+  selectors.push(selectorTemp)
 
   return selectors
 }

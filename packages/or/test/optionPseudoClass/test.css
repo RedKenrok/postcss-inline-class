@@ -1,0 +1,3 @@
+*:any(.a, .b) {
+  color: red;
+}

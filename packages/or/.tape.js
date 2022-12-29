@@ -14,6 +14,18 @@ module.exports = {
   'multiple/test': {
     message: 'multiple',
   },
+  'optionPreserveWhitespace/test': {
+    message: 'optionPreserveWhitespace',
+    options: {
+      preserveWhitespace: true,
+    },
+  },
+  'optionPseudoClass/test': {
+    message: 'optionPseudoClass',
+    options: {
+      pseudoClass: 'any',
+    },
+  },
   'pseudoClass/test': {
     message: 'pseudoClass',
   },

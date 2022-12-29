@@ -17,12 +17,13 @@ const plugin = (options = {}) => {
   // Merge options with default.
   options = Object.assign({
     pseudoClass: 'or',
+    preserveWhitespace: false,
   }, options ? options : {})
 
   return {
     postcssPlugin: 'postcss-or',
 
-    Rule: (rule, { result }) => {
+    Rule: async (rule, { result }) => {
       let selectorsFinal = []
       let selectorsToCheck = splitSelectors(rule.selector)
       let changed = false
@@ -44,9 +45,9 @@ const plugin = (options = {}) => {
           changed = true
 
           // Segment the content and process it.
-          const contentSegments = splitSelectors(pseudoData.content)
+          const contentSegments = splitSelectors(pseudoData.content, !options.preserveWhitespace)
           for (let i = 0; i < contentSegments.length; i++) {
-            const contentSegment = contentSegments[i].trim()
+            const contentSegment = contentSegments[i]
             // Create new selectors.
             selectorsIntermittent.push(
               selector.substring(0, pseudoData.start) +
