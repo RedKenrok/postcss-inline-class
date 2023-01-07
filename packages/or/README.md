@@ -1,13 +1,13 @@
 # PostCSS or
 
-Post CSS plugin for simplifying or selectors (`,`). Instead of duplicating a selector for a few changes use the `or()` pseudo-class in your selector.
+Post CSS plugin for simplifying or selectors (`,`). Instead of duplicating a selector for a few changes use the `or()` pseudo-class in your selector. Similar to the `is()` or `where()` pseudo classes, but allows hierarchies to be included.
 
 <table>
 <tr><td>Before</td><td>After</td></tr>
 <tr><td>
 
 ```CSS
-button:or(:active, :focus, :hover) {
+fieldset:or(:hover, > *:focus) {
   [...]
 }
 ```
@@ -15,9 +15,8 @@ button:or(:active, :focus, :hover) {
 </td><td>
 
 ```CSS
-button:active,
-button:focus,
-button:hover {
+fieldset:hover,
+fieldset > *:focus {
   [...]
 }
 ```
@@ -64,7 +63,7 @@ With `preserveWhite` set to `true`.
 <tr><td>
 
 ```CSS
-.panel:any(.panel-border, .panel-content.panel-border) {
+.panel:or(.panel-border, .panel-content.panel-border) {
   [...]
 }
 ```
